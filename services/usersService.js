@@ -7,13 +7,13 @@ module.exports = {
 
         let response = await usersModel.nameUser(user.user);
         if (response.length == 0) { // Si no me arroja ningun resultado entonces el query esta vacio
-            throw new Error('El nombre de user no esta registrado')
+            throw new Error('The username is not registered.')
         };
        
         response = await usersModel.passUser(user.user);
         let passverify = bcrypt.compareSync(user.pass, response[0].pass)
         if (passverify == false) {
-            throw new Error('Contraseña incorrecta')
+            throw new Error('Wrong password.')
         };
         
         let email = await usersModel.emailUser(user.user);
@@ -24,7 +24,7 @@ module.exports = {
             user_id: id
         };
         const token = jwt.sign(tokenData, 'Secret', {
-            expiresIn: 60 * 60 * 24
+            expiresIn: 60 * 60 * 0.5
         });
 
         return token;
@@ -32,9 +32,9 @@ module.exports = {
 
 	signin: async (user) => {
 
-        let response = await usersModel.nameUser(user.user);
+        let response = await usersModel.email(user.email);
         if (response.length > 0) {
-            throw new Error('Nombre de user existente')
+            throw new Error('That user already exists')
         }
         
         response = await usersModel.newUser(user);

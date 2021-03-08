@@ -11,13 +11,13 @@ app.post('/accounting', async (req, res) => {
             !req.body.type ||
             !req.body.category_id ||
             !req.body.user_id) {
-            throw new Error('concept y Categoría son datos obligatorios');
+            throw new Error('Please enter all data');
         }
         const concept = trim.conEspacios(req.body.concept);
         const amount = trim.conEspacios(req.body.concept);
         
         if ( concept || amount){
-            throw new Error('Los campos requeridos no pueden permanecer vacios');
+            throw new Error('Required fields cannot remain empty');
         }
         
         let accounting = {
@@ -86,7 +86,7 @@ app.get('/accounting/:id', async (req, res) => {
     try {
         let response = await accountingModel.accountingId(req.params.id);
         if (response.length == 0) {
-            throw new Error('No se encuentra ese accounting');
+            throw new Error("That operation wasn't found");
         }
         res.status(200).send({
             response: response
@@ -103,7 +103,7 @@ app.get('/accounting/category/:id', async (req, res) => {
     try {
         let response = await accountingModel.categoryAccounting(req.params.id);
         if (response.length == 0) {
-            throw new Error('No se encuentra ese accounting');
+            throw new Error("That category wasn't found");
         }
         res.status(200).send({
             response: response
@@ -127,13 +127,13 @@ app.put('/accounting/:id', async (req, res) => {
             !req.body.category_id ||
             !req.body.user_id
             ) {
-            throw new Error('Los datos requeridos son obligatorios');
+            throw new Error('Please enter all data');
         }
         const concept = trim.conEspacios(req.body.concept);
         const amount = trim.conEspacios(req.body.concept);
         
         if ( concept || amount){
-            throw new Error('Los campos requeridos no pueden permanecer vacios');
+            throw new Error('Required fields cannot remain empty');
         }
         let accounting = {
             "id": req.params.id, 
@@ -172,7 +172,7 @@ app.delete("/accounting/:id", async (req, res) => {
         let response = await accountingService.deleteAccounting(id);
 
         res.status(200).send({
-            response: "Se borro correctamente",
+            response: "Removed successfully",
         });
     } catch (e) {
         console.error(e.message);

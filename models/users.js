@@ -19,6 +19,12 @@ module.exports = {
 			[user]);
 		return response;
 	},
+	email: async (email) => {
+		var response = await conexion.query(
+			'SELECT email FROM users WHERE email = ?', 
+			[email]);
+		return response;
+	},
 	idUser: async (user) => {
 		var response = await conexion.query(
 			'SELECT id FROM users WHERE id = ?', 

@@ -4,7 +4,7 @@ module.exports = {
 	newCategory: async (name) => {
 		var response = await categoryModel.nameCategory(name);
 		if (response.length > 0) {
-			throw new Error('Category Existente');
+			throw new Error('That category already exists');
 		}
 
 		response = await categoryModel.newCategory(name);
@@ -14,12 +14,12 @@ module.exports = {
 	editCategory: async (category) => {
 		var response = await categoryModel.nameCategory(category.name);
 		if (response.length > 0) {
-			throw new Error('Category Existente');
+			throw new Error('That category already exists');
 		}
 
 		response = await categoryModel.categoryAccounting(category.id);
 		if (response.length > 0) {
-			throw new Error("Esta category tiene Accounting asociados, no se puede edit");
+			throw new Error("This category has associated operations, it cannot be edited.");
 		}
 
 		response = await categoryModel.editCategory(category);
@@ -29,12 +29,12 @@ module.exports = {
 	deleteCategory: async (id) => {
 		var response = await categoryModel.categoryId(id);
 		if (response.length == 0) {
-			throw new Error("Esta category no existe");
+			throw new Error("This category doesn't exist");
 		}
 
 		response = await categoryModel.categoryAccounting(id);
 		if (response.length > 0) {
-			throw new Error("Esta category tiene Accounting asociados, no se puede eliminar");
+			throw new Error("This category has associated operations, it cannot be deleted.");
 		}
 
 		response = await categoryModel.deleteCategory(id)
@@ -44,7 +44,7 @@ module.exports = {
 	categoryID: async (id) => {
 		var response = await categoryModel.categoryId(id);
 		if (response.length < 1) {
-			throw new Error("Esta category no existe");
+			throw new Error("This category doesn't exist");
 		}
 		return response;
 	}

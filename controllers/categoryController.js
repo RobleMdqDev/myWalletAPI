@@ -8,10 +8,10 @@ app.post('/category', async (req, res) => {
 
     try {
         if (!req.body.name) {
-            throw new Error('Falta enviar el name');
+            throw new Error("The name wasn't sent");
         }
         if ( trim.conEspacios(req.body.name)) {
-            throw new Error('Los campos requeridos no pueden permanecer con espacios vacios');
+            throw new Error('Required fields cannot remain empty');
         }
 
         let name = req.body.name.toUpperCase();
@@ -69,7 +69,7 @@ app.delete('/category/:id', async (req, res) => {
 
         let response = await categoryService.deleteCategory(id);
         res.status(200).send({
-            response: 'Se borro correctamente la category'
+            response: 'Removed successfully'
         });
     } catch (e) {
         console.error(e.message);
@@ -85,7 +85,7 @@ app.put('/category/:id', async (req, res) => {
         if (!req.params.id ||
             !req.body.name 
             ) {
-            throw new Error('Los datos requeridos son obligatorios');
+            throw new Error('Required fields cannot remain empty');
         }
       
         let category = {
