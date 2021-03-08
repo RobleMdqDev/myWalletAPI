@@ -10,7 +10,7 @@ app.post('/category', async (req, res) => {
         if (!req.body.name) {
             throw new Error('Falta enviar el name');
         }
-        if (await trim.conEspacios(req.body.name)) {
+        if ( trim.conEspacios(req.body.name)) {
             throw new Error('Los campos requeridos no pueden permanecer con espacios vacios');
         }
 

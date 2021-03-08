@@ -9,6 +9,7 @@ const cors = require('cors');
 // Requerimiento de carpetas-----------------
 const categoryController = require('./controllers/categoryController.js');
 const usersController = require('./controllers/usersController.js');
+const accountingController = require('./controllers/accountingController.js');
 
 // Declaración del paquete express ----------
 const app = express();
@@ -63,6 +64,7 @@ app.use(express.static('public')); // permite uso de la carpeta con el nombre ex
 
 app.use('/', usersController);
 app.use('/', categoryController);
+app.use('/', accountingController);
 
 
 // Establecer puerto  ------------------------

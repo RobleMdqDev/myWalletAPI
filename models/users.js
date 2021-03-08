@@ -21,7 +21,7 @@ module.exports = {
 	},
 	idUser: async (user) => {
 		var response = await conexion.query(
-			'SELECT id FROM users WHERE user = ?', 
+			'SELECT id FROM users WHERE id = ?', 
 			[user]);
 		return response;
 	},

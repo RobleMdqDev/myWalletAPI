@@ -20,12 +20,7 @@ module.exports = {
 		let response = await conexion.query(
 			'SELECT * FROM categories');
 		return response;
-	},
-	categoryAccounting: async (id) => {
-		let response = await conexion.query(
-			'SELECT * FROM accounting WHERE category_id = ?', [id]);
-		return response;
-	},
+	},	
 	deleteCategory: async (id) => {
 		let response = await conexion.query(
 			'DELETE FROM categories WHERE id = ?', [id]);
