@@ -27,9 +27,15 @@ app.post('/signin', async(req, res) => {
 
         let response = await usersService.signin(user);
 
-        res.status(200).send({ message: "Successful registration" }); 
+        res.send({ 
+            status: 200,
+            message: "Successful registration"
+        }); 
     } catch (e) {
-        res.status(414).send({ message: e.message });
+        res.send({ 
+            status: 414,
+            message: e.message
+        });
     }
 });
 
@@ -42,17 +48,22 @@ app.post('/login', async(req, res) => {
         }
 
         let user = {
-            "user": req.body.user,
-            "pass": req.body.pass
+            "user": req.body.user,            
+            "pass": req.body.pass            
         }
         let response = await usersService.login(user);
         
         res.status(200).send({
+            status:200,
+            user: req.body.user,           
             token: response
         });
     } catch (e) {
         console.log(e.message);
-        res.status(414).send({ message: e.message });
+        res.send({ 
+            status: 413,
+            message: e.message 
+        });
     }
 });
 

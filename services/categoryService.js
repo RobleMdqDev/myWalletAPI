@@ -1,4 +1,5 @@
 const categoryModel = require('../models/category.js')
+const accountingModel = require('../models/accounting')
 
 module.exports = {
 	newCategory: async (name) => {
@@ -17,7 +18,7 @@ module.exports = {
 			throw new Error('That category already exists');
 		}
 
-		response = await categoryModel.categoryAccounting(category.id);
+		response = await accountingModel.categoryAccounting(category.id);
 		if (response.length > 0) {
 			throw new Error("This category has associated operations, it cannot be edited.");
 		}
@@ -31,8 +32,7 @@ module.exports = {
 		if (response.length == 0) {
 			throw new Error("This category doesn't exist");
 		}
-
-		response = await categoryModel.categoryAccounting(id);
+		response = await accountingModel.categoryAccounting(id);
 		if (response.length > 0) {
 			throw new Error("This category has associated operations, it cannot be deleted.");
 		}

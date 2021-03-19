@@ -23,8 +23,9 @@ app.post('/category', async (req, res) => {
         });
     } catch (e) {
         console.log(e.message);
-        res.status(413).send({
-            error: e.message
+        res.send({
+            status: 413,
+            message: e.message
         });
     }
 });
@@ -40,7 +41,7 @@ app.get('/category', async (req, res) => {
     } catch (e) {
         console.log(e.message);
         res.status(413).send({
-            error: e.message
+            message: e.message
         });
     }
 });
@@ -57,7 +58,7 @@ app.get('/category/:id', async (req, res) => {
     } catch (e) {
         console.log(e.message);
         res.status(413).send({
-            error: e.message
+            message: e.message
         });
     }
 });
@@ -74,7 +75,8 @@ app.delete('/category/:id', async (req, res) => {
     } catch (e) {
         console.error(e.message);
         res.status(413).send({
-            error: e.message
+            status: 413,
+            message: e.message
         });
     }
 });
@@ -101,7 +103,7 @@ app.put('/category/:id', async (req, res) => {
     } catch (e) {
         console.error(e.message);
         res.status(413).send({
-            "Error": e.message
+            message: e.message
         });
     }
 

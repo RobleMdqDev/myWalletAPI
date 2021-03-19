@@ -19,7 +19,7 @@ module.exports = {
         let email = await usersModel.emailUser(user.user);
         let id = await usersModel.idUser(user.user);
         const tokenData = {
-            nombre: user.user,
+            user: user.user,
             email: email,
             user_id: id
         };
@@ -27,7 +27,7 @@ module.exports = {
             expiresIn: 60 * 60 * 0.5
         });
 
-        return token;
+        return {token, user_id: id};
 	},
 
 	signin: async (user) => {
