@@ -140,19 +140,21 @@ app.get('/accounting/:id', async (req, res) => {
     }
 });
 
-app.get('/accounting/category/:id', async (req, res) => {
+app.get('/accounting/category/:id&:user_id', async (req, res) => {
     try {
-        let response = await accountingModel.categoryAccounting(req.params.id);
+        console.log(req.params.id, req.params.user_id)
+        let response = await accountingModel.categoryAccounting(req.params.id, req.params.user_id);
         if (response.length == 0) {
             throw new Error("That category wasn't found");
         }
+        
         res.send({
             status: 200,
             response: response
         });
     } catch (e) {
         console.error(e.message);
-        res.send({
+        res.status(413).send({
             status: 413,
             message: e.message
         });
@@ -185,8 +187,8 @@ app.put('/accounting/:id', async (req, res) => {
             "date": req.body.date,
             "type": req.body.type,
             "category_id": req.body.category_id,
-            "user_id": req.body.user_id,
-                        
+            "user_id": req.body.user_id
+                                    
         }
 
         let response = await accountingService.editAccounting(accounting);
@@ -197,7 +199,7 @@ app.put('/accounting/:id', async (req, res) => {
             type: accounting.type,
             date: accounting.date,
             category_id: accounting.category_id,
-            user_id: accounting.user_id
+            user_id: accounting.user_id            
         });
     } catch (e) {
         console.error(e.message);

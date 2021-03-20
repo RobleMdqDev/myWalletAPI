@@ -6,9 +6,10 @@ module.exports = {
             'SELECT concept FROM accounting WHERE concept = ?', [concept]);
         return response;
     },
-    categoryAccounting: async (id) => {
+    categoryAccounting: async (id, user_id) => {
 		let response = await conexion.query(
-			'SELECT * FROM accounting WHERE category_id = ?', [id]);
+            'SELECT accounting.id, accounting.concept, accounting.amount, accounting.date, accounting.type, accounting.category_id, accounting.user_id, categories.name FROM accounting INNER JOIN categories ON (categories.id = accounting.category_id) WHERE (category_id = ? && user_id = ?) ORDER BY date DESC', [id, user_id]);
+			
 		return response;
 	},
     idAccounting: async (accounting) => {
